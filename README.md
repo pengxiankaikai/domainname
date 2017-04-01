@@ -1,0 +1,2 @@
+# domainname
+domain name check
