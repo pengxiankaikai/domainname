@@ -1,41 +1,38 @@
 package com.pk.domaincheck.domain;
 
 import java.io.Serializable;
-import java.util.List;
 
 /**
  * Created by pengkai
- * @date 2017-04-01.
+ * @date 2017-04-10.
  */
 public class Result implements Serializable{
 
-    private Integer errorCode;
+    private Boolean status; //查询状态
 
-    private List<Module> module;
+    private Boolean available; //是否能注册
 
-    private Boolean success;
-
-    public Integer getErrorCode() {
-        return errorCode;
+    public Boolean getStatus() {
+        return status;
     }
 
-    public void setErrorCode(Integer errorCode) {
-        this.errorCode = errorCode;
+    public void setStatus(Boolean status) {
+        this.status = status;
     }
 
-    public List<Module> getModule() {
-        return module;
+    public Boolean getAvailable() {
+        return available;
     }
 
-    public void setModule(List<Module> module) {
-        this.module = module;
+    public void setAvailable(Boolean available) {
+        this.available = available;
     }
 
-    public Boolean getSuccess() {
-        return success;
-    }
-
-    public void setSuccess(Boolean success) {
-        this.success = success;
+    @Override
+    public String toString() {
+        return "Result{" +
+                "status=" + status +
+                ", available=" + available +
+                '}';
     }
 }
