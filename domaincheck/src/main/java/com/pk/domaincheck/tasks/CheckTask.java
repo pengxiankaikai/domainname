@@ -3,7 +3,6 @@ package com.pk.domaincheck.tasks;
 import com.google.gson.Gson;
 import com.pk.domaincheck.common.HttpConnectionUtil;
 import com.pk.domaincheck.domain.Result;
-import com.pk.domaincheck.domain.WanWangResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -33,9 +32,9 @@ public class CheckTask {
         s = s.replaceAll("/n", "");
         Result result = gson.fromJson(s, Result.class);
         if (result.getStatus() && result.getAvailable()){
-            System.out.println("该域名可用");
+            System.out.println("use");
         }else {
-            System.out.println("该域名已被注册");
+            System.out.println("no");
         }
     }
 }
