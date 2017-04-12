@@ -81,6 +81,18 @@
 			<version>1.7.25</version>
 		</dependency>
 
+		<!--util-->
+		<dependency>
+			<groupId>commons-codec</groupId>
+			<artifactId>commons-codec</artifactId>
+			<version>1.10</version>
+		</dependency>
+		<dependency>
+			<groupId>com.google.zxing</groupId>
+			<artifactId>core</artifactId>
+			<version>3.3.0</version>
+		</dependency>
+
 		<!--google json-->
 		<dependency>
 			<groupId>com.google.code.gson</groupId>
