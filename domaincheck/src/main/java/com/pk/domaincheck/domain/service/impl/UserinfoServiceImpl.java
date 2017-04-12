@@ -1,5 +1,7 @@
 package com.pk.domaincheck.domain.service.impl;
 
+import com.pk.domaincheck.base.mapper.BaseMapper;
+import com.pk.domaincheck.base.service.impl.BaseServiceImpl;
 import com.pk.domaincheck.domain.domain.Userinfo;
 import com.pk.domaincheck.domain.mapper.UserinfoMapper;
 import com.pk.domaincheck.domain.service.UserinfoService;
@@ -12,13 +14,13 @@ import javax.annotation.Resource;
  * @date 2017-04-11.
  */
 @Service
-public class UserinfoServiceImpl implements UserinfoService{
+public class UserinfoServiceImpl extends BaseServiceImpl<Userinfo> implements UserinfoService{
 
     @Resource
     private UserinfoMapper userinfoMapper;
 
     @Override
-    public int insert(Userinfo record) {
-        return userinfoMapper.insert(record);
+    public BaseMapper getMapper() {
+        return userinfoMapper;
     }
 }
