@@ -31,11 +31,14 @@ public class Domainproduct {
      */
     private Date createtime;
 
+    private Boolean isuse;
+
     public Domainproduct(){}
 
     public Domainproduct(String val) {
         this.val = val;
         this.createtime = new Timestamp(new Date().getTime());
+        this.isuse = false;
     }
 
     /**
@@ -108,5 +111,13 @@ public class Domainproduct {
      */
     public void setCreatetime(Date createtime) {
         this.createtime = createtime;
+    }
+
+    public Boolean getIsuse() {
+        return isuse;
+    }
+
+    public void setIsuse(Boolean isuse) {
+        this.isuse = isuse;
     }
 }

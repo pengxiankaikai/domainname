@@ -30,4 +30,9 @@ public class DomainproductServiceImpl extends BaseServiceImpl<Domainproduct> imp
     public Domainproduct selectLastOne() {
         return domainproductMapper.selectLastOne();
     }
+
+    @Override
+    public int updateUseBy(Integer id) {
+        return domainproductMapper.updateUseBy(id);
+    }
 }

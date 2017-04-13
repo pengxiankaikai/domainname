@@ -9,5 +9,16 @@ import com.pk.domaincheck.domain.domain.Domainproduct;
  */
 public interface DomainproductService extends BaseService<Domainproduct>{
 
+    /**
+     * 查找最后一个没有使用过的记录
+     * @return
+     */
     Domainproduct selectLastOne();
+
+    /**
+     * 根据id更新数据已使用
+     * @param id id
+     * @return
+     */
+    int updateUseBy(Integer id);
 }

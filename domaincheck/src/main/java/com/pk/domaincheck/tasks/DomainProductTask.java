@@ -18,7 +18,7 @@ public class DomainProductTask {
     @Resource
     private DomainproductService domainproductService;
 
-    @Scheduled(cron = "0/15 * * * * *")
+    @Scheduled(cron = "0/11 * * * * *")
     public void product(){
         Random random = new Random();
         boolean flag = false;

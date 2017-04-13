@@ -27,9 +27,9 @@ public interface DomainproductMapper extends BaseMapper<Domainproduct>{
      */
     @Insert({
         "insert into domainproduct (id, val, ",
-        "createtime)",
+        "createtime, isuse)",
         "values (#{id,jdbcType=INTEGER}, #{val,jdbcType=VARCHAR}, ",
-        "#{createtime,jdbcType=TIMESTAMP})"
+        "#{createtime,jdbcType=TIMESTAMP}, #{isuse,jdbcType=BOOLEAN})"
     })
     int insert(Domainproduct record);
 
@@ -50,14 +50,15 @@ public interface DomainproductMapper extends BaseMapper<Domainproduct>{
      */
     @Select({
         "select",
-        "id, val, createtime",
+        "id, val, createtime, isuse",
         "from domainproduct",
         "where id = #{id,jdbcType=INTEGER}"
     })
     @Results({
         @Result(column="id", property="id", jdbcType=JdbcType.INTEGER, id=true),
         @Result(column="val", property="val", jdbcType=JdbcType.VARCHAR),
-        @Result(column="createtime", property="createtime", jdbcType=JdbcType.TIMESTAMP)
+        @Result(column="createtime", property="createtime", jdbcType=JdbcType.TIMESTAMP),
+        @Result(column="isuse", property="isuse", jdbcType=JdbcType.BOOLEAN)
     })
     Domainproduct selectByPrimaryKey(Integer id);
 
@@ -80,20 +81,29 @@ public interface DomainproductMapper extends BaseMapper<Domainproduct>{
         "update domainproduct",
         "set val = #{val,jdbcType=VARCHAR},",
           "createtime = #{createtime,jdbcType=TIMESTAMP}",
-        "where id = #{id,jdbcType=INTEGER}"
+          "isuse = #{isuse,jdbcType=TIMESTAMP}",
+        "where id = #{id,jdbcType=BOOLEAN}"
     })
     int updateByPrimaryKey(Domainproduct record);
 
     @Select({
             "select",
-            "id, val, createtime",
+            "id, val, createtime,isuse",
             "from domainproduct",
-            "order by id desc limit 0,1"
+            "where isuse = 0 order by id asc limit 0,1"
     })
     @Results({
             @Result(column="id", property="id", jdbcType=JdbcType.INTEGER, id=true),
             @Result(column="val", property="val", jdbcType=JdbcType.VARCHAR),
-            @Result(column="createtime", property="createtime", jdbcType=JdbcType.TIMESTAMP)
+            @Result(column="createtime", property="createtime", jdbcType=JdbcType.TIMESTAMP),
+            @Result(column="isuse", property="isuse", jdbcType=JdbcType.BOOLEAN)
     })
     Domainproduct selectLastOne();
+
+    @Update({
+            "update domainproduct",
+            "set isuse = 1",
+            "where id = #{id,jdbcType=BOOLEAN}"
+    })
+    int updateUseBy(Integer id);
 }

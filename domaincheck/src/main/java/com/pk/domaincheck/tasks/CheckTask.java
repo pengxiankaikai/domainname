@@ -31,20 +31,23 @@ public class CheckTask {
     public void checkdomain(){
         String url = "http://www.yumingco.com/api";
         Domainproduct domainproduct = domainproductService.selectLastOne();
-        String param = "domain=_&suffix=com";
-        param = param.replace("_", domainproduct.getVal());
-        String s = null;
-        try {
-            s =  HttpConnectionUtil.sendGet(url, param);
-        } catch (Exception e) {
-            log.error("connect fail, info: {}", e);
-        }
-        s = s.replaceAll("/n", "");
-        Result result = gson.fromJson(s, Result.class);
-        if (result.getStatus() && result.getAvailable()){
-            log.info("this val = " + domainproduct.getVal() + " ---- can register");
-        }else {
-            log.warn("this val = " + domainproduct.getVal() + " ---- NO NO NO");
+        if (null != domainproduct) {
+            String param = "domain=_&suffix=com";
+            param = param.replace("_", domainproduct.getVal());
+            String s = null;
+            try {
+                s = HttpConnectionUtil.sendGet(url, param);
+            } catch (Exception e) {
+                log.error("connect fail, info: {}", e);
+            }
+            s = s.replaceAll("/n", "");
+            Result result = gson.fromJson(s, Result.class);
+            if (result.getStatus() && result.getAvailable()) {
+                log.info("this val = " + domainproduct.getVal() + " ---- can register");
+            } else {
+                log.warn("this val = " + domainproduct.getVal() + " ---- NO NO NO");
+            }
+            domainproductService.updateUseBy(domainproduct.getId());
         }
     }
 }
