@@ -19,7 +19,7 @@ public class WanWangCheckTask {
 
     Gson gson = new Gson();
 
-    @Scheduled(cron = "* * * * * 0/10")
+//    @Scheduled(cron = "* * * * * 0/10")
     public void checd(){
         String url = "https://checkapi.aliyun.com/check/checkdomain?callback=jQuery1111025134699921105064_1491474026536&domain=a.shop&token=check-web-hichina-com%3Ardbvjxg98j9axenzeqld2kb4vssbctnm&_=1491474026640";
 //        String url = "http://panda.www.net.cn/cgi-bin/check.cgi"; //返回xml字符串 万网接口

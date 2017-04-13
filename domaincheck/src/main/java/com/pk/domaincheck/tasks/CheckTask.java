@@ -3,10 +3,14 @@ package com.pk.domaincheck.tasks;
 import com.google.gson.Gson;
 import com.pk.domaincheck.common.HttpConnectionUtil;
 import com.pk.domaincheck.domain.Result;
+import com.pk.domaincheck.domain.domain.Domainproduct;
+import com.pk.domaincheck.domain.service.DomainproductService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
+
+import javax.annotation.Resource;
 
 /**
  * Created by pengkai
@@ -19,10 +23,16 @@ public class CheckTask {
 
     Gson gson = new Gson();
 
-    @Scheduled(cron = "0/10 * * * * *")
+    @Resource
+    private DomainproductService domainproductService;
+
+
+    @Scheduled(cron = "0/20 * * * * *")
     public void checkdomain(){
         String url = "http://www.yumingco.com/api";
-        String param = "domain=irose&suffix=com";
+        Domainproduct domainproduct = domainproductService.selectLastOne();
+        String param = "domain=_&suffix=com";
+        param = param.replace("_", domainproduct.getVal());
         String s = null;
         try {
             s =  HttpConnectionUtil.sendGet(url, param);
@@ -32,9 +42,9 @@ public class CheckTask {
         s = s.replaceAll("/n", "");
         Result result = gson.fromJson(s, Result.class);
         if (result.getStatus() && result.getAvailable()){
-            System.out.println("use");
+            log.info("this val = " + domainproduct.getVal() + " ---- can register");
         }else {
-            System.out.println("no");
+            log.warn("this val = " + domainproduct.getVal() + " ---- NO NO NO");
         }
     }
 }
