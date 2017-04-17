@@ -32,7 +32,7 @@ public class DomainproductServiceImpl extends BaseServiceImpl<Domainproduct> imp
     }
 
     @Override
-    public int updateUseBy(Integer id) {
-        return domainproductMapper.updateUseBy(id);
+    public int updateUseBy(Boolean isavailable, Integer id) {
+        return domainproductMapper.updateUseBy(isavailable, id);
     }
 }

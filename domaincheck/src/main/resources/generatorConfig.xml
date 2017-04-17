@@ -33,7 +33,7 @@
         </javaClientGenerator>
 
         <!-- !!!! Table Configurations !!!! -->
-        <table tableName="userinfo" domainObjectName="Userinfo" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
+        <table tableName="domainproduct" domainObjectName="Domainproduct" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
                enableUpdateByExample="false"/>
     </context>
 </generatorConfiguration>

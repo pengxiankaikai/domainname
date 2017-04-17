@@ -33,6 +33,8 @@ public class Domainproduct {
 
     private Boolean isuse;
 
+    private Boolean isavailable;//是否能注册
+
     public Domainproduct(){}
 
     public Domainproduct(String val) {
@@ -119,5 +121,13 @@ public class Domainproduct {
 
     public void setIsuse(Boolean isuse) {
         this.isuse = isuse;
+    }
+
+    public Boolean getIsavailable() {
+        return isavailable;
+    }
+
+    public void setIsavailable(Boolean isavailable) {
+        this.isavailable = isavailable;
     }
 }

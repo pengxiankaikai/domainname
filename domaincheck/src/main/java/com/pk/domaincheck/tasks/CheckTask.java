@@ -42,12 +42,14 @@ public class CheckTask {
             }
             s = s.replaceAll("/n", "");
             Result result = gson.fromJson(s, Result.class);
+            Boolean isavailable = false;
             if (result.getStatus() && result.getAvailable()) {
+                isavailable = true;
                 log.info("this val = " + domainproduct.getVal() + " ---- can register");
             } else {
                 log.warn("this val = " + domainproduct.getVal() + " ---- NO NO NO");
             }
-            domainproductService.updateUseBy(domainproduct.getId());
+            domainproductService.updateUseBy(isavailable, domainproduct.getId());
         }
     }
 }

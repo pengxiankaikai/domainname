@@ -20,5 +20,5 @@ public interface DomainproductService extends BaseService<Domainproduct>{
      * @param id id
      * @return
      */
-    int updateUseBy(Integer id);
+    int updateUseBy(Boolean isavailable, Integer id);
 }
