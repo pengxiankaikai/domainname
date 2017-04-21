@@ -1,6 +1,7 @@
 package com.pk.domaincheck.tasks;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 import com.pk.domaincheck.common.HttpConnectionUtil;
 import com.pk.domaincheck.domain.Result;
 import com.pk.domaincheck.domain.domain.Domainproduct;
@@ -14,6 +15,7 @@ import javax.annotation.Resource;
 
 /**
  * Created by pengkai
+ * @mail pengxiankaikai@163.com
  * @date 2017-04-01.
  */
 @Component
@@ -41,15 +43,25 @@ public class CheckTask {
                 log.error("connect fail, info: {}", e);
             }
             s = s.replaceAll("/n", "");
-            Result result = gson.fromJson(s, Result.class);
-            Boolean isavailable = false;
-            if (result.getStatus() && result.getAvailable()) {
-                isavailable = true;
-                log.info("this val = " + domainproduct.getVal() + " ---- can register");
-            } else {
-                log.warn("this val = " + domainproduct.getVal() + " ---- NO NO NO");
+            Result result = null;
+            boolean isError = false;
+            try {
+                result = gson.fromJson(s, Result.class);
+            } catch (JsonSyntaxException e) {
+                e.printStackTrace();
+                log.error("connect exception!");
+                isError = true;
             }
-            domainproductService.updateUseBy(isavailable, domainproduct.getId());
+            if (!isError){
+                Boolean isavailable = false;
+                if (result.getStatus() && result.getAvailable()) {
+                    isavailable = true;
+                    log.info("this val = " + domainproduct.getVal() + " ---- can register");
+                } else {
+                    log.warn("this val = " + domainproduct.getVal() + " ---- NO NO NO");
+                }
+                domainproductService.updateUseBy(isavailable, domainproduct.getId());
+            }
         }
     }
 }
